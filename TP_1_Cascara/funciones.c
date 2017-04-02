@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
 #include "funciones.h"
 
 /** \brief Ingreso de numeros con validacion y rangos
@@ -11,18 +9,15 @@
  *
  */
 
-int ingreso (char texto[],char err0r[], int min,int max)
+int ingreso (char texto[],char err0r[])
 {
     int z;
 
     printf("\n%s: ",texto);
-    scanf("%d" ,&z);
-
-    while(z<min||z>max||isalpha(z))
+    while(scanf("%d" ,&z)!=1)
     {
         fflush(stdin);
-        printf("\nERROR: Reingrese un %s : ",err0r);
-        scanf("%d" ,&z);
+        printf("\nERROR-Ingrese un %s no letras! : ",err0r);
     }
 
     return z;
@@ -119,7 +114,7 @@ float factorial(int z)
 {
     int resultado;
 
-    if(z==0)
+    if(z<=0)
     {
         resultado=1;
     }
@@ -130,14 +125,3 @@ float factorial(int z)
 
     return resultado;
 }
-
-    /*
-    float fact=1;
-    int i;
-
-    for(i=1;i<=z;i++)
-    {
-        fact=(float)fact*i;
-    }
-    return fact;
-    */

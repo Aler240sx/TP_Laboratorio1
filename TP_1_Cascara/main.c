@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include "funciones.h"
 
 int main()
@@ -57,10 +56,10 @@ int main()
         switch(opcion)
         {
             case 1:
-                operando1=ingreso("Ingrese Primer Numero" ,"numero",0 ,10000);
+                operando1=ingreso("Ingrese Primer Numero" ,"numero");
                 break;
             case 2:
-                operando2=ingreso("Ingrese Segundo Numero" ,"numero",0 ,10000);
+                operando2=ingreso("Ingrese Segundo Numero" ,"numero");
                 break;
             case 3:
                 sumar(operando1,operando2);
@@ -75,14 +74,14 @@ int main()
                 multiplicar(operando1,operando2);
                 break;
             case 7:
-                printf("\nLa Factorial del Ingreso A es: %f\n" ,factorial(operando1));
+                printf("\nLa Factorial del Ingreso A es: %.2f\n" ,factorial(operando1));
                 break;
             case 8:
                 sumar(operando1,operando2);
                 restar(operando1,operando2);
                 dividir(operando1,operando2);
                 multiplicar(operando1,operando2);
-                printf("\nLa Factorial del Ingreso A es: %f\n" ,factorial(operando1));
+                printf("\nLa Factorial del Ingreso A es: %.2f\n" ,factorial(operando1));
                 break;
             case 9:
                 seguir = 'n';
