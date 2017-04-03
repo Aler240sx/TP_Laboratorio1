@@ -4,8 +4,8 @@
 
 int main()
 {
-    int operando1=0;
-    int operando2=0;
+    float operando1=0;
+    float operando2=0;
     char seguir='s';
     int opcion=0;
 
@@ -17,7 +17,7 @@ int main()
         }
         else
         {
-            printf("1- Ingresar 1er operando (A=%d)\n" ,operando1);
+            printf("1- Ingresar 1er operando (A=%.2f)\n" ,operando1);
         }
 
         if(operando2==0)
@@ -26,7 +26,7 @@ int main()
         }
         else
         {
-            printf("2- Ingresar 2do operando (B=%d)\n" ,operando2);
+            printf("2- Ingresar 2do operando (B=%.2f)\n" ,operando2);
         }
 
         if(operando1==0&&operando2==0)
@@ -41,11 +41,11 @@ int main()
         }
         else
         {
-            printf("3- Calcular la suma (%d+%d)\n" ,operando1,operando2);
-            printf("4- Calcular la resta (%d-%d)\n" ,operando1,operando2);
-            printf("5- Calcular la division (%d/%d)\n" ,operando1,operando2);
-            printf("6- Calcular la multiplicacion (%d*%d)\n" ,operando1,operando2);
-            printf("7- Calcular el factorial (%d!)\n" ,operando1);
+            printf("3- Calcular la suma (%.2f+%.2f)\n" ,operando1,operando2);
+            printf("4- Calcular la resta (%.2f-%.2f)\n" ,operando1,operando2);
+            printf("5- Calcular la division (%.2f/%.2f)\n" ,operando1,operando2);
+            printf("6- Calcular la multiplicacion (%.2f*%.2f)\n" ,operando1,operando2);
+            printf("7- Calcular el factorial (%.f!)\n" ,operando1);
             printf("8- Calcular todas las operaciones\n");
             printf("9- Salir\n");
         }

@@ -9,12 +9,12 @@
  *
  */
 
-int ingreso (char texto[],char err0r[])
+float ingreso (char texto[],char err0r[])
 {
-    int z;
+    float z;
 
     printf("\n%s: ",texto);
-    while(scanf("%d" ,&z)!=1)
+    while(scanf("%f" ,&z)!=1)
     {
         fflush(stdin);
         printf("\nERROR-Ingrese un %s no letras! : ",err0r);
@@ -31,12 +31,12 @@ int ingreso (char texto[],char err0r[])
  *
  */
 
-int sumar (int x, int y)
+float sumar (float x, float y)
 {
-    int resultado;
+    float resultado;
 
     resultado=x+y;
-    printf("\nLa Suma de los numeros ingresados es: %d\n" ,resultado);
+    printf("\nLa Suma de los numeros ingresados es: %.2f\n" ,resultado);
 
     return resultado;
 }
@@ -49,12 +49,12 @@ int sumar (int x, int y)
  *
  */
 
-int restar (int x, int y)
+float restar (float x, float y)
 {
-    int resultado;
+    float resultado;
 
     resultado=x-y;
-    printf("\nLa Resta de los numeros ingresados es: %d\n" ,resultado);
+    printf("\nLa Resta de los numeros ingresados es: %.2f\n" ,resultado);
 
     return resultado;
 }
@@ -67,7 +67,7 @@ int restar (int x, int y)
  *
  */
 
-int multiplicar (int x, int y)
+float multiplicar (float x, float y)
 {
     float resultado;
 
@@ -85,7 +85,7 @@ int multiplicar (int x, int y)
  *
  */
 
-int dividir (int x, int y)
+float dividir (float x, float y)
 {
     float resultado;
 
@@ -112,7 +112,10 @@ int dividir (int x, int y)
 
 float factorial(int z)
 {
+    int auxnum;
     int resultado;
+
+    auxnum=(int)z;
 
     if(z<=0)
     {
@@ -120,7 +123,7 @@ float factorial(int z)
     }
     else
     {
-        resultado=z*factorial(z-1);
+        resultado=auxnum*factorial(z-1);
     }
 
     return resultado;
