@@ -9,8 +9,10 @@ void obtenerEspacioLibre(EPersona lista[],int cantidad)
 {
     int i;
     int contador = 0;
+    int DNIrepetido;
+    int DNIrespuesta;
     char auxnombre[64];
-    char auxdni[64];
+    char auxdni[9];
     char auxedad[64];
 
     printf("*********Carga de Personas*********\n");
@@ -20,22 +22,33 @@ void obtenerEspacioLibre(EPersona lista[],int cantidad)
 
         if(lista[i].estado!=1)
         {
-            //Nombres
-            fflush(stdin);
-            ingresonombre("Ingrese Nombre: ",auxnombre);
-            strcpy(lista[i].nombre, auxnombre);
-            //Edad
-            printf("Ingrese Edad: ");
-            IngresoEntreRango(auxedad ,"Edad" ,1 ,120);
-            lista[i].edad = atoi(auxedad);
             //DNI
             printf("Ingrese DNI |8 digitos|: ");
-            ingresodni(auxdni);
-            lista[i].dni = atoi(auxdni);
-            //Estado de la Persona
-            lista[i].estado = 1;
-            //contadores;
-            break;
+            IngresoDNI(auxdni);
+            //Verificacion de DNI en la lista
+            DNIrepetido = atoi(auxdni);
+            DNIrespuesta = NumeroRepetido(lista ,cantidad ,DNIrepetido);
+            if(DNIrespuesta != -1)
+            {
+                printf("\nERROR: El DNI fue ingresado anteriormente, Reingrese denuevo.\n");
+                break;
+            }
+            else
+            {
+                lista[i].dni = DNIrepetido;
+                //Nombres
+                fflush(stdin);
+                IngresoNombre("Ingrese Nombre: ",auxnombre);
+                strcpy(lista[i].nombre, auxnombre);
+                //Edad
+                printf("Ingrese Edad: ");
+                IngresoEntreRango(auxedad ,"Edad" ,1 ,120);
+                lista[i].edad = atoi(auxedad);
+                //Estado de la Persona
+                lista[i].estado = 1;
+                //contadores;
+                break;
+            }
         }
         else
         {
@@ -54,6 +67,7 @@ void BajaDePersonas(EPersona lista[],int cantidad)
     int i;
     int busqueda;
     char resp;
+    int reingreso = 0;
 
     printf("*********Baja de Personas*********\n");
     printf("Ingrese DNI: ");
@@ -64,33 +78,38 @@ void BajaDePersonas(EPersona lista[],int cantidad)
         if(busqueda == lista[i].dni)
         {
             printf("\n*Persona encontrada*\n\n");
-            printf("Nombre: %s\nEdad: %d\nDNI: %d\n" ,lista[i].nombre,lista[i].edad,lista[i].dni);
+            printf("Nombre: %s\nEdad: %d\nDNI: %d\n" ,lista[i].nombre ,lista[i].edad,lista[i].dni);
 
             printf("\nDesea Borrar a %s?\n" ,lista[i].nombre);
+            do{
             printf("Ingrese S/N: ");
             fflush(stdin);
             scanf("%c" ,&resp);
+            resp = tolower(resp);
             switch(resp)
             {
                 case 's':
-                case 'S':
                     lista[i].estado = 0;
-                    printf("\nBorrado!\n");
+                    lista[i].dni = 0;
+                    printf("\nBorrado Exitoso!\n");
+                    reingreso = 0;
                     break;
 
                 case 'n':
-                case 'N':
                     printf("\nOperacion Cancelada\n");
+                    reingreso = 0;
                     break;
 
                 default:
-                    printf("\nERROR Ingrese S o N\n");
+                    printf("\nERROR: Ingrese una opcion valida!\n");
+                    reingreso = 1;
                     break;
             }
+            }while(reingreso==1);
             break;
         }
     }
-    if(busqueda!=lista[i].dni)
+    if(busqueda!=lista[i].dni && lista[i].dni>1)
     {
         printf("\nDNI no encontrado\n");
     }
@@ -98,61 +117,49 @@ void BajaDePersonas(EPersona lista[],int cantidad)
 
 void OrdenamientoDePersonas(EPersona lista[] ,int cantidad)
 {
-    int i;
-    int j;
-    int opcion;
-
+    int i ,j;
+    cantidad = CANT;
     EPersona auxnombre;
-
-    printf("\nOrdenamiento:\n1-A a Z\n2-Z a A\n\n");
-    printf("Ingrese Ordenamiento: ");
-    scanf("%d" ,&opcion);
-
-    switch(opcion)
-    {
-        case 1:
-            for(i=0 ;i<CANT; i++)
-            {
-                for(j=i+1 ;j<CANT; j++)
-                {
-                    if(strcmp(lista[i].nombre , lista[j].nombre)>0)
-                    {
-                        auxnombre = lista[i];
-                        lista[i] = lista[j];
-                        lista[j] = auxnombre;
-                    }
-                }
-            }
-            break;
-        case 2:
-            for(i=0 ;i<CANT; i++)
-            {
-                for(j=i+1;j<CANT;j++)
-                {
-                    if(strcmp(lista[i].nombre , lista[j].nombre)<0)
-                    {
-                        auxnombre = lista[i];
-                        lista[i] = lista[j];
-                        lista[j] = auxnombre;
-                    }
-                }
-            }
-            break;
-        default:
-            printf("\nIngrese una opcion del menu!\n");
-            break;
-    }
+    int vacio = 0;
 
     for(i=0 ;i<CANT; i++)
     {
         if(lista[i].estado==1)
         {
-            printf("\n-----------------\nNombre: %s\nEdad: %d\nDNI: %d\n" ,lista[i].nombre,lista[i].edad,lista[i].dni);
+            for(j=i+1 ;j<CANT; j++)
+            {
+                if(strcmp(lista[i].nombre , lista[j].nombre)>0)
+                {
+                    auxnombre = lista[i];
+                    lista[i] = lista[j];
+                    lista[j] = auxnombre;
+                }
+            }
         }
-
+        else
+        {
+            vacio++;
+        }
     }
-    printf("\n\n");
+
+    if(vacio==CANT)
+    {
+        printf("\nLista de Personas Vacia");
+    }
+    else
+    {
+        for(i=0 ;i<CANT; i++)
+        {
+
+            if(lista[i].estado==1)
+            {
+                printf("\n-----------------\nNombre: %s\nEdad: %d\nDNI: %d\n" ,lista[i].nombre,lista[i].edad,lista[i].dni);
+            }
+        }
+    }
+    printf("\n");
 }
+
 
 void GraficoDePersonas(EPersona lista[] ,int cantidad)
 {
@@ -233,15 +240,37 @@ void GraficoDePersonas(EPersona lista[] ,int cantidad)
 }
 
 /**
+Detectar numero repetido
+*/
+
+int NumeroRepetido(EPersona lista[], int tamanio, int numero)
+{
+    int indice = -1;
+    int i;
+
+    for(i=0; i<tamanio; i++)
+    {
+        if(lista[i].dni == numero)
+        {
+            indice = i;
+            break;
+        }
+    }
+
+    return indice;
+}
+
+
+/**
 Ingrese de Nombres
 */
-char* ingresonombre(char texto[], char nombres[])
+char* IngresoNombre(char texto[], char nombres[])
 {
     printf("%s" ,texto);
     fflush(stdin);
     gets(nombres);
 
-    while((!esletra(nombres)) || (esEspacio(nombres)))
+    while((!EsLetra(nombres)) || (esEspacio(nombres)))
     {
         fflush(stdin);
         printf("ERROR: Reingrese Nombre: ");
@@ -258,7 +287,7 @@ char* ingresonombre(char texto[], char nombres[])
 Ingreso de DNI
 */
 
-char* ingresodni(char dni[])
+char* IngresoDNI(char dni[])
 {
     int tamanio;
     int i;
@@ -266,9 +295,9 @@ char* ingresodni(char dni[])
     fflush(stdin);
     gets(dni);
 
-    while((esletra(dni)) || (strlen(dni)!=8))
+    while((EsLetra(dni)) || (strlen(dni)!=8) || (dni[0]=='-'))
     {
-        printf("ERROR: Reingrese denuevo el dni: ");
+        printf("ERROR: Reingrese denuevo el DNI: ");
         fflush(stdin);
         gets(dni);
     }
@@ -279,7 +308,7 @@ char* ingresodni(char dni[])
     {
         while(isalpha(dni[i]))
         {
-            printf("ERROR: Reingrese denuevo el dni: ");
+            printf("ERROR: Reingrese denuevo el DNI: ");
             fflush(stdin);
             gets(dni);
             i++;
@@ -300,7 +329,7 @@ char* IngresoEntreRango(char valor[] ,char texto[],int minimo,int maximo)
     fflush(stdin);
     gets(valor);
 
-    while(esletra(valor))
+    while(EsLetra(valor) || (valor[0]=='-'))
     {
         fflush(stdin);
         printf("ERROR: reingrese %s: " ,texto);
@@ -309,10 +338,10 @@ char* IngresoEntreRango(char valor[] ,char texto[],int minimo,int maximo)
 
     valoraux = atoi(valor);
 
-    while(valoraux<minimo || valoraux>maximo)
+    while(valoraux<minimo || valoraux>maximo || valoraux =='-')
     {
         fflush(stdin);
-        printf("ERROR: Reingrese %s entre 1-%d: " ,texto ,maximo);
+        printf("ERROR: Reingrese %s entre %d-%d: " ,texto ,minimo,maximo);
         scanf("%d" ,&valoraux);
     }
 
@@ -352,7 +381,7 @@ char* Mayusculas(char a[])
 Verificador de Letras
 */
 
-int esletra(char ingreso[])
+int EsLetra(char ingreso[])
 {
     int i = 0;
     int tamanio;
@@ -371,6 +400,9 @@ int esletra(char ingreso[])
     return flag;
 }
 
+/**
+Verificador de Espacio
+*/
 int esEspacio(char ingreso[])
 {
     int i = 0;

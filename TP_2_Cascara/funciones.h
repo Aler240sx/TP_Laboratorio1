@@ -2,10 +2,10 @@
 #define FUNCIONES_H_INCLUDED
 
 typedef struct{
+    int dni;
     char nombre[50];
     int edad;
     int estado;
-    int dni;
 }EPersona;
 
 /**
@@ -39,7 +39,7 @@ void GraficoDePersonas(EPersona lista[] ,int cantidad);
 /**
  * Detecta si hay letras en una cadena de caracteres
  */
-int esletra(char ingreso[]);
+int EsLetra(char ingreso[]);
 
 /**
  * Detecta si hay un espacio en una cadena de caracteres
@@ -50,7 +50,7 @@ int esEspacio(char ingreso[]);
  * Toma una cadena de caracteres en formato DNI numerico
  * ingresado por el usuario y valida que cumpla las condiciones que un DNI debe tener
  */
-char* ingresodni(char dni[]);
+char* IngresoDNI(char dni[]);
 
 /**
  * Toma una cadena de caracteres en formato char de numeros para su validacion, pide un texto para avisarle al
@@ -61,11 +61,16 @@ char* IngresoEntreRango(char valor[] ,char texto[],int minimo,int maximo);
 /**
  * Toma una cadena de caracteres y el mensaje a ser mostrado antes de ingresar la cadena
  */
-char* ingresonombre(char texto[], char nombres[]);
+char* IngresoNombre(char texto[], char nombres[]);
 
 /**
- * toma una cadena de caracteres y capitaliza la primera letra en cada palabra encontrada en el char
+ * Toma una cadena de caracteres y capitaliza la primera letra en cada palabra encontrada en el char
  */
 char* Mayusculas(char a[]);
+
+/**
+ * Verifica si un numero fue ingresado anteriormente en un Array
+ */
+int NumeroRepetido(EPersona lista[], int tamanio, int numero);
 
 #endif // FUNCIONES_H_INCLUDED
