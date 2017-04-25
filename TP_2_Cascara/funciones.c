@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "funciones.h"
 #include "string.h"
 #include "ctype.h"
+#include "funciones.h"
 #define CANT 3
 
-void obtenerEspacioLibre(EPersona lista[],int cantidad)
+void ObtenerEspacioLibre(EPersona lista[],int cantidad)
 {
     int i;
     int contador = 0;
@@ -142,7 +142,7 @@ void OrdenamientoDePersonas(EPersona lista[] ,int cantidad)
         }
     }
 
-    if(vacio==CANT)
+    if(vacio == CANT)
     {
         printf("\nLista de Personas Vacia");
     }
@@ -163,15 +163,15 @@ void OrdenamientoDePersonas(EPersona lista[] ,int cantidad)
 
 void GraficoDePersonas(EPersona lista[] ,int cantidad)
 {
-    cantidad=CANT;
-    int i=0;
+    cantidad = CANT;
+    int i = 0;
     int mayor;
-    int bajo=0; //hasta 18 años
-    int medio=0; //de 19 años a 35
-    int alto=0; //mayores de 35
-    int flag=0;
+    int bajo = 0; //hasta 18 años
+    int medio = 0; //de 19 años a 35
+    int alto = 0; //mayores de 35
+    int flag = 0;
 
-    for(i=0;i<cantidad;i++)
+    for(i=0 ;i<cantidad; i++)
     {
         if(lista[i].estado==1)
         {
@@ -189,7 +189,7 @@ void GraficoDePersonas(EPersona lista[] ,int cantidad)
             }
         }
     }
-
+////////////////////////////////////
     if(bajo>=medio&&bajo>=alto)
     {
         mayor=bajo;
@@ -205,7 +205,8 @@ void GraficoDePersonas(EPersona lista[] ,int cantidad)
             mayor=alto;
         }
     }
-    for(i=mayor;i>0;i--)
+
+    for(i=mayor ;i>0; i--)
     {
         if(i<cantidad)
         {
@@ -226,9 +227,9 @@ void GraficoDePersonas(EPersona lista[] ,int cantidad)
         }
         if(i<=alto)
         {
-            if(flag==0)
+            if(flag == 0)
                 printf("\t\t*");
-            if(flag==1)
+            if(flag == 1)
                 printf("\t*");
         }
         printf("\n");
@@ -236,7 +237,7 @@ void GraficoDePersonas(EPersona lista[] ,int cantidad)
 
     printf("--+-----------------");
     printf("\n  |<18\t19-35\t>35 ----->Rango de Edades");
-    printf("\n   %d\t%d\t%d -----> Personas\n", bajo, medio, alto);
+    printf("\n   %d\t%d\t%d -----> Personas\n",bajo ,medio ,alto);
 }
 
 /**
@@ -385,15 +386,15 @@ int EsLetra(char ingreso[])
 {
     int i = 0;
     int tamanio;
-    int flag=1;
+    int flag = 1;
 
     tamanio=strlen(ingreso);
 
-    for(i=0;i<tamanio;i++)
+    for(i=0 ;i<tamanio; i++)
     {
         if((ingreso[i]!=' ') && (ingreso[i]<'a'||ingreso[i]>'z') && (ingreso[i]<'A'||ingreso[i]>'Z'))
         {
-            flag=0;
+            flag = 0;
         }
     }
 

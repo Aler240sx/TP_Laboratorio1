@@ -13,7 +13,7 @@ typedef struct{
  * @param lista el array se pasa como parametro.
  * @return el primer indice disponible
  */
-void obtenerEspacioLibre(EPersona[] ,int);
+void ObtenerEspacioLibre(EPersona[] ,int);
 
 /**
  * Busca por medio del DNI ingresado en el array.

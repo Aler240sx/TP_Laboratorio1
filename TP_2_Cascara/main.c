@@ -10,7 +10,7 @@ int main()
     char seguir = 's';
     int opcion = 0;
 
-    while(seguir=='s')
+    while(seguir == 's')
     {
         printf("1- Agregar persona\n");
         printf("2- Borrar persona\n");
@@ -25,7 +25,7 @@ int main()
         switch(opcion)
         {
             case 1:
-                obtenerEspacioLibre(lista, CANT);
+                ObtenerEspacioLibre(lista, CANT);
                 break;
             case 2:
                 BajaDePersonas(lista, CANT);
