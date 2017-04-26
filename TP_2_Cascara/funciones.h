@@ -56,21 +56,21 @@ char* IngresoDNI(char dni[]);
  * Toma una cadena de caracteres en formato char de numeros para su validacion, pide un texto para avisarle al
  * usuario de lo que debe ingresar, toma el rango minimo y el rango maximo a cumplir
  */
-char* IngresoEntreRango(char valor[] ,char texto[],int minimo,int maximo);
+char* IngresoEntreRango(char valor[] ,char texto[] ,int minimo ,int maximo);
 
 /**
  * Toma una cadena de caracteres y el mensaje a ser mostrado antes de ingresar la cadena
  */
-char* IngresoNombre(char texto[], char nombres[]);
+char* IngresoNombre(char texto[] ,char nombres[]);
 
 /**
  * Toma una cadena de caracteres y capitaliza la primera letra en cada palabra encontrada en el char
  */
-char* Mayusculas(char a[]);
+char* Mayusculas(char caracter[]);
 
 /**
  * Verifica si un numero fue ingresado anteriormente en un Array
  */
-int NumeroRepetido(EPersona lista[], int tamanio, int numero);
+int NumeroRepetido(EPersona lista[] ,int tamanio ,int numero);
 
 #endif // FUNCIONES_H_INCLUDED

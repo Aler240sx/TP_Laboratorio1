@@ -5,7 +5,7 @@
 #include "funciones.h"
 #define CANT 3
 
-void ObtenerEspacioLibre(EPersona lista[],int cantidad)
+void ObtenerEspacioLibre(EPersona lista[] ,int cantidad)
 {
     int i;
     int contador = 0;
@@ -15,7 +15,7 @@ void ObtenerEspacioLibre(EPersona lista[],int cantidad)
     char auxdni[9];
     char auxedad[64];
 
-    printf("*********Carga de Personas*********\n");
+    printf("\n*********Carga de Personas*********\n\n");
 
     for(i=0 ;i<CANT; i++)
     {
@@ -30,7 +30,7 @@ void ObtenerEspacioLibre(EPersona lista[],int cantidad)
             DNIrespuesta = NumeroRepetido(lista ,cantidad ,DNIrepetido);
             if(DNIrespuesta != -1)
             {
-                printf("\nERROR: El DNI fue ingresado anteriormente, Reingrese denuevo.\n");
+                printf("\nERROR: El DNI %d fue ingresado anteriormente, Reingrese denuevo.\n" ,DNIrepetido);
                 break;
             }
             else
@@ -38,7 +38,7 @@ void ObtenerEspacioLibre(EPersona lista[],int cantidad)
                 lista[i].dni = DNIrepetido;
                 //Nombres
                 fflush(stdin);
-                IngresoNombre("Ingrese Nombre: ",auxnombre);
+                IngresoNombre("Ingrese Nombre: " ,auxnombre);
                 strcpy(lista[i].nombre, auxnombre);
                 //Edad
                 printf("Ingrese Edad: ");
@@ -46,7 +46,6 @@ void ObtenerEspacioLibre(EPersona lista[],int cantidad)
                 lista[i].edad = atoi(auxedad);
                 //Estado de la Persona
                 lista[i].estado = 1;
-                //contadores;
                 break;
             }
         }
@@ -62,7 +61,7 @@ void ObtenerEspacioLibre(EPersona lista[],int cantidad)
     }
 }
 
-void BajaDePersonas(EPersona lista[],int cantidad)
+void BajaDePersonas(EPersona lista[] ,int cantidad)
 {
     int i;
     int busqueda;
@@ -75,38 +74,45 @@ void BajaDePersonas(EPersona lista[],int cantidad)
 
     for(i=0 ;i<CANT; i++)
     {
-        if(busqueda == lista[i].dni)
+        if(busqueda == 0)
         {
-            printf("\n*Persona encontrada*\n\n");
-            printf("Nombre: %s\nEdad: %d\nDNI: %d\n" ,lista[i].nombre ,lista[i].edad,lista[i].dni);
-
-            printf("\nDesea Borrar a %s?\n" ,lista[i].nombre);
-            do{
-            printf("Ingrese S/N: ");
-            fflush(stdin);
-            scanf("%c" ,&resp);
-            resp = tolower(resp);
-            switch(resp)
-            {
-                case 's':
-                    lista[i].estado = 0;
-                    lista[i].dni = 0;
-                    printf("\nBorrado Exitoso!\n");
-                    reingreso = 0;
-                    break;
-
-                case 'n':
-                    printf("\nOperacion Cancelada\n");
-                    reingreso = 0;
-                    break;
-
-                default:
-                    printf("\nERROR: Ingrese una opcion valida!\n");
-                    reingreso = 1;
-                    break;
-            }
-            }while(reingreso==1);
             break;
+        }
+        else
+        {
+            if(busqueda == lista[i].dni)
+            {
+                printf("\n*Persona encontrada*\n\n");
+                printf("Nombre: %s\nEdad: %d\nDNI: %d\n" ,lista[i].nombre ,lista[i].edad,lista[i].dni);
+
+                printf("\nDesea Borrar a %s?\n" ,lista[i].nombre);
+                do{
+                printf("Ingrese S/N: ");
+                fflush(stdin);
+                scanf("%c" ,&resp);
+                resp = tolower(resp);
+                switch(resp)
+                {
+                    case 's':
+                        lista[i].estado = 0;
+                        lista[i].dni = 0;
+                        printf("\nBorrado Exitoso!\n");
+                        reingreso = 0;
+                        break;
+
+                    case 'n':
+                        printf("\nOperacion Cancelada\n");
+                        reingreso = 0;
+                        break;
+
+                    default:
+                        printf("\nERROR: Ingrese una opcion valida!\n");
+                        reingreso = 1;
+                        break;
+                }
+                }while(reingreso == 1);
+                break;
+            }
         }
     }
     if(busqueda!=lista[i].dni && lista[i].dni>1)
@@ -124,7 +130,7 @@ void OrdenamientoDePersonas(EPersona lista[] ,int cantidad)
 
     for(i=0 ;i<CANT; i++)
     {
-        if(lista[i].estado==1)
+        if(lista[i].estado == 1)
         {
             for(j=i+1 ;j<CANT; j++)
             {
@@ -144,14 +150,14 @@ void OrdenamientoDePersonas(EPersona lista[] ,int cantidad)
 
     if(vacio == CANT)
     {
-        printf("\nLista de Personas Vacia");
+        printf("\nLista de Personas Vacia\n");
     }
     else
     {
         for(i=0 ;i<CANT; i++)
         {
 
-            if(lista[i].estado==1)
+            if(lista[i].estado == 1)
             {
                 printf("\n-----------------\nNombre: %s\nEdad: %d\nDNI: %d\n" ,lista[i].nombre,lista[i].edad,lista[i].dni);
             }
@@ -170,10 +176,11 @@ void GraficoDePersonas(EPersona lista[] ,int cantidad)
     int medio = 0; //de 19 años a 35
     int alto = 0; //mayores de 35
     int flag = 0;
+    char barra = 219;
 
     for(i=0 ;i<cantidad; i++)
     {
-        if(lista[i].estado==1)
+        if(lista[i].estado == 1)
         {
             if(lista[i].edad<=18)
             {
@@ -189,22 +196,24 @@ void GraficoDePersonas(EPersona lista[] ,int cantidad)
             }
         }
     }
-////////////////////////////////////
-    if(bajo>=medio&&bajo>=alto)
+
+    if(bajo>=medio && bajo>=alto)
     {
-        mayor=bajo;
+        mayor = bajo;
     }
     else
     {
-        if(medio>=bajo&&medio>=alto)
+        if(medio>=bajo && medio>=alto)
         {
-            mayor=medio;
+            mayor = medio;
         }
         else
         {
-            mayor=alto;
+            mayor = alto;
         }
     }
+
+    printf("\n");
 
     for(i=mayor ;i>0; i--)
     {
@@ -218,26 +227,30 @@ void GraficoDePersonas(EPersona lista[] ,int cantidad)
         }
         if(i<=bajo)
         {
-            printf("*");
+            printf(" %c" ,barra);
         }
         if(i<=medio)
         {
-            flag=1;
-            printf("\t*");
+            flag = 1;
+            printf("\t  %c" ,barra);
         }
         if(i<=alto)
         {
             if(flag == 0)
-                printf("\t\t*");
+            {
+                printf("\t\t %c" ,barra);
+            }
             if(flag == 1)
-                printf("\t*");
+            {
+                printf("\t %c" ,barra);
+            }
         }
         printf("\n");
     }
 
     printf("--+-----------------");
-    printf("\n  |<18\t19-35\t>35 ----->Rango de Edades");
-    printf("\n   %d\t%d\t%d -----> Personas\n",bajo ,medio ,alto);
+    printf("\n  |<18\t19-35\t>35 ---Edades");
+    printf("\n    %d\t  %d\t %d  ---Personas\n" ,bajo ,medio ,alto);
 }
 
 /**
@@ -265,7 +278,7 @@ int NumeroRepetido(EPersona lista[], int tamanio, int numero)
 /**
 Ingrese de Nombres
 */
-char* IngresoNombre(char texto[], char nombres[])
+char* IngresoNombre(char texto[] ,char nombres[])
 {
     printf("%s" ,texto);
     fflush(stdin);
@@ -342,11 +355,11 @@ char* IngresoEntreRango(char valor[] ,char texto[],int minimo,int maximo)
     while(valoraux<minimo || valoraux>maximo || valoraux =='-')
     {
         fflush(stdin);
-        printf("ERROR: Reingrese %s entre %d-%d: " ,texto ,minimo,maximo);
+        printf("ERROR: Reingrese %s entre %d-%d: " ,texto ,minimo ,maximo);
         scanf("%d" ,&valoraux);
     }
 
-    sprintf(valor, "%d" ,valoraux);
+    sprintf(valor ,"%d", valoraux);
 
     return valor;
 }
@@ -355,27 +368,27 @@ char* IngresoEntreRango(char valor[] ,char texto[],int minimo,int maximo)
 Capitalizacion de letras
 */
 
-char* Mayusculas(char a[])
+char* Mayusculas(char caracter[])
 {
     int i;
-    int tamanio = strlen(a);
+    int tamanio = strlen(caracter);
     int contador = 0;
 
     for(i=0 ;i<tamanio; i++)
     {
-        if(isspace(a[i]))
+        if(isspace(caracter[i]))
         {
             contador = 0;
         }
 
-        if(isalpha(a[i]) && !isspace(a[i]) && contador==0)
+        if(isalpha(caracter[i]) && !isspace(caracter[i]) && contador==0)
         {
-            a[i] = toupper(a[i]);
+            caracter[i] = toupper(caracter[i]);
             contador = 1;
         }
     }
 
-    return a;
+    return caracter;
 }
 
 /**
@@ -411,7 +424,9 @@ int esEspacio(char ingreso[])
     while(ingreso[i]!='\0')
     {
         if((ingreso[i]!=' '))
-        return 0;
+        {
+            return 0;
+        }
         i++;
     }
 

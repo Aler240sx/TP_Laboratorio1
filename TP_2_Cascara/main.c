@@ -8,7 +8,7 @@ int main()
     EPersona lista[CANT];
 
     char seguir = 's';
-    int opcion = 0;
+    int opcion;
 
     while(seguir == 's')
     {
@@ -20,24 +20,27 @@ int main()
 
         printf("Ingrese una opcion: ");
         fflush(stdin);
-        scanf("%d",&opcion);
+        scanf("%d" ,&opcion);
 
         switch(opcion)
         {
             case 1:
-                ObtenerEspacioLibre(lista, CANT);
+                ObtenerEspacioLibre(lista ,CANT);
                 break;
             case 2:
-                BajaDePersonas(lista, CANT);
+                BajaDePersonas(lista ,CANT);
                 break;
             case 3:
-                OrdenamientoDePersonas(lista, CANT);
+                OrdenamientoDePersonas(lista ,CANT);
                 break;
             case 4:
-                GraficoDePersonas(lista, CANT);
+                GraficoDePersonas(lista ,CANT);
                 break;
             case 5:
                 seguir = 'n';
+                break;
+            default:
+                printf("\nERROR: Ingrese una opcion valida.\n\n");
                 break;
         }
         system("pause");
