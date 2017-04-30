@@ -3,7 +3,7 @@
 #include "string.h"
 #include "ctype.h"
 #include "funciones.h"
-#define CANT 3
+#define CANT 20
 
 void ObtenerEspacioLibre(EPersona lista[] ,int cantidad)
 {
@@ -172,8 +172,8 @@ void GraficoDePersonas(EPersona lista[] ,int cantidad)
     cantidad = CANT;
     int i = 0;
     int mayor;
-    int bajo = 0; //hasta 18 años
-    int medio = 0; //de 19 años a 35
+    int bajo = 0; //hasta 18 aÃ±os
+    int medio = 0; //de 19 aÃ±os a 35
     int alto = 0; //mayores de 35
     int flag = 0;
     char barra = 219;
